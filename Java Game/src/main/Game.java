@@ -17,6 +17,8 @@ public class Game extends Canvas implements Runnable{
 	
 	private Random r;
 	private Handler handler; 
+	private HUD hud;
+	
 	public Game(){
 		handler = new Handler();
 		
@@ -24,10 +26,14 @@ public class Game extends Canvas implements Runnable{
 		
 		new Window(WIDTH, HEIGHT, "Let's Build a Game!", this);
 		
+		hud = new HUD();
 		r = new Random();
 		handler.addObject(new Player(WIDTH/2-32, HEIGHT/2-32, ID.Player));
-		handler.addObject(new Player(WIDTH/2+64, HEIGHT/2-32, ID.Player2));
+		for(int i=0; i < 1; i++){
+		handler.addObject(new BasicEnemy(r.nextInt(WIDTH), r.nextInt(HEIGHT), ID.BasicEnemy));
+		}
 	}
+		
 	
 	public synchronized void start(){
 		thread = new Thread(this);
@@ -45,6 +51,7 @@ public class Game extends Canvas implements Runnable{
 	}
 	
 	public void run(){
+		this.requestFocus(); //Dont need to click on screen to put in keyboard input, happens automatically.
 		long lastTime = System.nanoTime();
 		double amountofTicks = 60.0;
 		double ns = 1000000000 / amountofTicks;
@@ -74,6 +81,7 @@ public class Game extends Canvas implements Runnable{
 	
 	private void tick(){
 		handler.tick();
+		hud.tick();
 	}
 	
 	private void render(){
@@ -89,10 +97,21 @@ public class Game extends Canvas implements Runnable{
 		g.fillRect(0, 0, WIDTH, HEIGHT);
 		
 		handler.render(g);
+		
+		hud.render(g);
+		
 		g.dispose();
 		bs.show();
 	}
 	
+	public static int clamp(int var, int min, int max){  
+		if(var >= max)
+			return var = max;
+		else if(var <= min)
+			return var = min;
+		else
+			return var;
+	}
 	public static void main(String args[]){
 		new Game();
 	}

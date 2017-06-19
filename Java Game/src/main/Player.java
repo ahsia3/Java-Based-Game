@@ -16,12 +16,15 @@ public class Player extends GameObject {
 	public void tick(){
 		x += velX;
 		y += velY;
+		
+		x=Game.clamp(x,  0, Game.WIDTH - 37);
+		y=Game.clamp(y,  0, Game.HEIGHT - 60);
 	}
 	
 	public void render (Graphics g){
 		if(id == ID.Player) g.setColor(Color.white);
-		else if(id == ID.Player2) g.setColor(Color.black);
 	
 		g.fillRect(x, y, 32, 32);
 	}
+
 }
