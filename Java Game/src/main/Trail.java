@@ -8,6 +8,7 @@ import java.awt.Rectangle;
 
 public class Trail extends GameObject{
 	
+
 	private float alpha = 1;
 	private float life;
 	
