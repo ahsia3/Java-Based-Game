@@ -15,6 +15,7 @@ public class Trail extends GameObject{
 	private Color color;
 	private int width, height;
 	
+	
 	//life = 0.001 - 0.1
 	
 	public Trail(int x, int y, ID id, Color color, int width, int height, float life, Handler handler){
