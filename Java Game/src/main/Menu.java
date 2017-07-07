@@ -13,11 +13,13 @@ public class Menu extends MouseAdapter{
 
 	private Game game;
 	private Handler handler;
+	private HUD hud;
 	private Random r = new Random();
 	
-	public Menu(Game game, Handler handler){
+	public Menu(Game game, Handler handler, HUD hud){
 		this.game = game;
 		this.handler = handler;
+		this.hud = hud;
 	}
 	public void mousePressed(MouseEvent e){
 		int mx = e.getX();
@@ -28,6 +30,8 @@ public class Menu extends MouseAdapter{
 			if(mouseOver(mx, my, 210, 150, 200, 64)){
 				game.gameState = STATE.Game;
 				handler.addObject(new Player(Game.WIDTH/2-32, Game.HEIGHT/2-32, ID.Player, handler));
+				handler.clearEnemies();
+				
 				//for(int i=0; i < 1; i++){
 					handler.addObject(new BasicEnemy(r.nextInt(Game.WIDTH), r.nextInt(Game.HEIGHT), ID.BasicEnemy, handler));
 				//}
@@ -50,6 +54,21 @@ public class Menu extends MouseAdapter{
 						return;
 					}
 				}
+				
+		//TRT AGAUB button when End game screen
+		if(game.gameState == STATE.End){
+			if(mouseOver(mx, my, 210, 350, 200, 64)){
+				game.gameState = STATE.Game;
+				hud.setLevel(1);
+				hud.setScore(0);
+				handler.addObject(new Player(Game.WIDTH/2-32, Game.HEIGHT/2-32, ID.Player, handler));
+				handler.clearEnemies();
+				
+				//for(int i=0; i < 1; i++){
+					handler.addObject(new BasicEnemy(r.nextInt(Game.WIDTH), r.nextInt(Game.HEIGHT), ID.BasicEnemy, handler));
+				//}
+			}
+		}
 	}
 	public void mouseReleased(MouseEvent e){
 		
@@ -100,6 +119,21 @@ public class Menu extends MouseAdapter{
 			g.setFont(fnt2);
 			g.drawRect(210, 350, 200, 64);
 			g.drawString("Back", 270, 390);
+		}else if(game.gameState == STATE.End){
+			Font fnt = new Font("arial", 1, 50);
+			Font fnt2 = new Font("arial", 1, 30);
+			Font fnt3 = new Font("arial", 1, 15);
+			
+			g.setFont(fnt);
+			g.setColor(Color.white);
+			g.drawString("GAME OVER", 180, 70);
+			
+			g.setFont(fnt3);
+			g.drawString("You lost with a score of: " + hud.getScore(), 175, 200);
+			
+			g.setFont(fnt2);
+			g.drawRect(210, 350, 200, 64);
+			g.drawString("Try Again", 245, 390);
 		}
 	}
 }
