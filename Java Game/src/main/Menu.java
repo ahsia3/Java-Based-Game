@@ -35,10 +35,14 @@ public class Menu extends MouseAdapter{
 				//for(int i=0; i < 1; i++){
 					handler.addObject(new BasicEnemy(r.nextInt(Game.WIDTH), r.nextInt(Game.HEIGHT), ID.BasicEnemy, handler));
 				//}
+					
+					AudioPlayer.getSound("menu_sound").play();
 			}
 			//help button
 			if(mouseOver(mx, my, 210, 250, 200, 64)){
 				game.gameState= STATE.Help;
+				
+				AudioPlayer.getSound("menu_sound").play();
 			}
 			
 			//quit button
@@ -51,11 +55,13 @@ public class Menu extends MouseAdapter{
 				if(game.gameState == STATE.Help){
 					if(mouseOver(mx, my, 210, 350, 200, 64)){
 						game.gameState = STATE.Menu;
+						AudioPlayer.getSound("menu_sound").play();
 						return;
 					}
+					
 				}
 				
-		//TRT AGAUB button when End game screen
+		//TRT AGAIN button when End game screen
 		if(game.gameState == STATE.End){
 			if(mouseOver(mx, my, 210, 350, 200, 64)){
 				game.gameState = STATE.Game;
@@ -67,6 +73,7 @@ public class Menu extends MouseAdapter{
 				//for(int i=0; i < 1; i++){
 					handler.addObject(new BasicEnemy(r.nextInt(Game.WIDTH), r.nextInt(Game.HEIGHT), ID.BasicEnemy, handler));
 				//}
+					AudioPlayer.getSound("menu_sound").play();
 			}
 		}
 	}
@@ -88,10 +95,15 @@ public class Menu extends MouseAdapter{
 		if(game.gameState == STATE.Menu){
 		Font fnt = new Font("arial", 1, 50);
 		Font fnt2 = new Font("arial", 1, 30);
+		Font fnt0 = new Font("Zapfino", 1, 15);
+		
+		g.setFont(fnt0);
+		g.setColor(Color.BLACK);
+		g.drawString("@ahsia    |    Special THANKS to RealTutsGML @YT     |   Summer 2017", 10, 446);
 		
 		g.setFont(fnt);
 		g.setColor(Color.white);
-		g.drawString("Menu", 240, 70);
+		g.drawString("WASDodge", 180, 70);
 		
 		g.setFont(fnt2);
 		g.drawRect(210, 150, 200, 64);
@@ -111,10 +123,11 @@ public class Menu extends MouseAdapter{
 			
 			g.setFont(fnt);
 			g.setColor(Color.white);
-			g.drawString("Help", 240, 70);
+			g.drawString("Help", 260, 70);
 			
 			g.setFont(fnt3);
-			g.drawString("Use WASD keys to move player and dodge enemies", 100, 150);
+			g.drawString("Use WASD keys to move player and dodge enemies", 120, 150);
+			g.drawString("Multiple types of enemies. Beware.", 120, 200);
 			
 			g.setFont(fnt2);
 			g.drawRect(210, 350, 200, 64);
@@ -129,7 +142,7 @@ public class Menu extends MouseAdapter{
 			g.drawString("GAME OVER", 180, 70);
 			
 			g.setFont(fnt3);
-			g.drawString("You lost with a score of: " + hud.getScore(), 175, 200);
+			g.drawString("You lost with a score of: " + hud.getScore(), 210, 200);
 			
 			g.setFont(fnt2);
 			g.drawRect(210, 350, 200, 64);
