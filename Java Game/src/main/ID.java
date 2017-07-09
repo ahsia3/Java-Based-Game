@@ -1,4 +1,4 @@
-package last.main;
+package main;
 
 public enum ID {
 

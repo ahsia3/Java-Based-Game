@@ -1,4 +1,4 @@
-package last.main;
+package main;
 
 import java.awt.AlphaComposite;
 import java.awt.Color;

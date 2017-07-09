@@ -1,4 +1,4 @@
-package last.main;
+package main;
 
 import java.awt.Canvas;
 import java.awt.Color;
