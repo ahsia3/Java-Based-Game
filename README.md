@@ -15,4 +15,4 @@ A java-implemented game where the objective is to dodge blocks and survive while
  - JarSplice - create executable jar file for the game
 
 ## Acknowledgements
-- Special thanks to [RealTutsGML](https://www.youtube.com/channel/UCOs7Q7IeuzgRyARaEqif75A) for guiding me in this project through his game development tutorials. Couldn't have done it without him.
+- Special thanks to [RealTutsGML](https://www.youtube.com/channel/UCOs7Q7IeuzgRyARaEqif75A) for helping me get in the right direction in this project through his game development tutorials. Couldn't have done it without him.
