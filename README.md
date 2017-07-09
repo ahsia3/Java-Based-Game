@@ -1,2 +1,3 @@
 # Java-Based-Game
-Blocks of dodge
+Step 1: Download res folder and WASDodge.jar file 
+Step 2: Make new Folder and put files into there
