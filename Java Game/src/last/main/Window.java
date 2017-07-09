@@ -1,4 +1,4 @@
-package main;
+package last.main;
 
 //Frame Class for game
 

@@ -1,4 +1,4 @@
-package main;
+package last.main;
 
 import java.awt.Color;
 import java.awt.Font;

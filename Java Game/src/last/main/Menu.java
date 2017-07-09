@@ -1,4 +1,4 @@
-package main;
+package last.main;
 
 import java.awt.Color;
 import java.awt.Font;
@@ -7,7 +7,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.Random;
 
-import main.Game.STATE;
+import last.main.Game.STATE;
 
 public class Menu extends MouseAdapter{
 

@@ -1,9 +1,9 @@
-package main;
+package last.main;
 
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
-import main.Game.STATE;
+import last.main.Game.STATE;
 
 public class KeyInput extends KeyAdapter{
 
