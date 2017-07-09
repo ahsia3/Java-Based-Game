@@ -126,7 +126,6 @@ public class Game extends Canvas implements Runnable{
 				hud.tick();
 				spawner.tick();
 				handler.tick();
-				
 				if(HUD.HEALTH <= 0){
 					HUD.HEALTH = 100;
 					gameState = STATE.End;
