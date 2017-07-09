@@ -172,14 +172,14 @@ public class Menu extends MouseAdapter{
 			
 			g.setFont(fnt);
 			g.setColor(Color.white);
-			g.drawString("GAME OVER", 180, 70);
+			g.drawString("GAME OVER", 170, 70);
 			
 			g.setFont(fnt3);
 			g.drawString("You lost with a score of: " + hud.getScore(), 210, 200);
 			
 			g.setFont(fnt2);
 			g.drawRect(210, 350, 200, 64);
-			g.drawString("Try Again", 245, 390);
+			g.drawString("Main Menu", 235, 392);
 		}else if(game.gameState == STATE.Select){
 			Font fnt = new Font("arial", 1, 50);
 			Font fnt2 = new Font("arial", 1, 30);

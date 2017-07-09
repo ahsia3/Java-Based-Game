@@ -9,7 +9,7 @@ public class EnemyBoss extends GameObject {
 
 	private Handler handler;
 	Random r= new Random();
-	private int timer = 80;
+	private int timer = 70;
 	private int timer2=50;
 	
 	public EnemyBoss(int x, int y, ID id, Handler handler) {
@@ -63,12 +63,12 @@ public class EnemyBoss extends GameObject {
 			velX *=-1;
 		}
 		
-		//handler.addObject(new Trail((int)x, (int)y, ID.Trail, Color.red, 96, 96, 0.008f, handler));
+		handler.addObject(new Trail((int)x, (int)y, ID.Trail, Color.red, 96, 96, 0.008f, handler));
 		
 	}
 	
 	public void render(Graphics g){
 		g.setColor(Color.red);
-		g.fillRect((int)x, (int)y, 96, 96);
+;		g.fillRect((int)x, (int)y, 96, 96);
 	}
 }

@@ -22,7 +22,7 @@ public class HUD {
 	}
 	
 	public void render(Graphics g){
-		g.setColor(Color.gray);
+		g.setColor(Color.lightGray);
 		g.fillRect(15, 15, 200 + bounds, 32);
 		g.setColor(new Color(75, (int)greenValue, 0));
 		g.fillRect(15, 15, (int)HEALTH * 2, 32);
@@ -31,6 +31,7 @@ public class HUD {
 		
 		g.drawString("Score: " + score, 80, 64);
 		g.drawString("Level: " + level, 10, 64);
+		g.setColor(Color.blue);
 		g.drawString("Space for Shop", 10, 96);
 	}
 	
