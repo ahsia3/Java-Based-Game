@@ -122,7 +122,6 @@ public class Game extends Canvas implements Runnable{
 	private void tick(){
 		
 		if (gameState== STATE.Game){
-			
 			if(!paused){
 				hud.tick();
 				spawner.tick();
