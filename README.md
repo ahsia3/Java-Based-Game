@@ -2,6 +2,11 @@
 A java-implemented game where the objective is to dodge blocks and survive while having the option to upgrade your player.
 
 ***Windows* only**
+
+## Got OLD versions?
+ - ONLY download the *WASDodge.jar* file to get new patch and replace the previous jar file 
+ 
+
 ## Installation
 
  - Download res folder and WASDodge.jar file 
