@@ -54,7 +54,7 @@ public class EnemyBoss extends GameObject {
 			
 			int spawn = r.nextInt(10);
 			if(spawn == 0){
-				handler.addObject(new EnemyBossBullet((int)x + 48, (int)y + 48, ID.EnemyBossBullet, handler));
+				handler.addObject(new EnemyBossBullet((int)x + 43, (int)y + 35, ID.EnemyBossBullet, handler));
 			}
 		}
 		
@@ -69,6 +69,11 @@ public class EnemyBoss extends GameObject {
 	
 	public void render(Graphics g){
 		g.setColor(Color.red);
-;		g.fillRect((int)x, (int)y, 96, 96);
+		g.fillRect((int)x, (int)y, 96, 96);
+
+		
+	
+		
+		
 	}
 }

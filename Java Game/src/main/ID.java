@@ -10,5 +10,6 @@ public enum ID {
 	EnemyBoss(),
 	EnemyBossBullet(),
 	HardEnemy(),
+	DamageOverTimeEnemy(),
 	BasicEnemy();
 }

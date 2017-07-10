@@ -62,6 +62,11 @@ public class Player extends GameObject {
 					HUD.HEALTH-=4;
 				}
 			}
+			if(tempObject.getID()==ID.DamageOverTimeEnemy){
+				if(getBounds().intersects(tempObject.getBounds())){
+					HUD.HEALTH-=.05;
+				}
+			}
 		}
 	}
 	
