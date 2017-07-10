@@ -66,6 +66,7 @@ public class spawn {
 					handler.addObject(new DamageOverTimeEnemy((Game.WIDTH/2)-48, -220, ID.DamageOverTimeEnemy, handler));
 				}
 			}
+
 			
 		}
 	}
