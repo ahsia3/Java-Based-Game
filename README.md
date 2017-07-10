@@ -13,6 +13,12 @@ A java-implemented game where the objective is to dodge blocks and survive while
  - Make new Folder and put files into there
  - Double click WASDodge.jar file
  - *Enjoy*
+
+OR
+- Download ZIP
+- Extract to a folder and make sure **res folder** and **WASDodge.jar file** are located in the *same* directory
+- Double click WASDodge.jar file
+- *Enjoy*
  
 ## Project Used:
  - Java eclipse
