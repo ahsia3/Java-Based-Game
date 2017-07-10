@@ -78,7 +78,6 @@ public class Shop extends MouseAdapter{
 					hud.setScore(hud.getScore() - B1);
 					B1 += 1000;
 					hud.bounds += 20;
-				
 				}
 				
 			}
