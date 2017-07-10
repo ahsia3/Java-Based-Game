@@ -11,6 +11,7 @@ public class HUD {
 	private float greenValue = 255;
 	
 	private int score = 0;
+	private int finalScore = 0;
 	private int level =1;
 	
 	public void tick(){
@@ -19,6 +20,7 @@ public class HUD {
 		greenValue = Game.clamp(greenValue, 0, 255);
 		
 		score++;
+		finalScore++;
 	}
 	
 	public void render(Graphics g){
@@ -30,9 +32,9 @@ public class HUD {
 		g.drawRect(15, 15, 200 + bounds, 32);
 		
 		g.drawString("Score: " + score, 80, 64);
-		g.drawString("Level: " + level, 10, 64);
+		g.drawString("Level: " + level, 15, 64);
 		g.setColor(Color.blue);
-		g.drawString("Space for Shop", 10, 96);
+		g.drawString("Space for Shop", 15, 96);
 	}
 	
 	public void setScore(int score){
@@ -50,5 +52,17 @@ public class HUD {
 	
 	public void setLevel(int level){
 		this.level = level;
+	}
+	
+	public int getfinalScore(){
+		return finalScore;
+	}
+	
+	public void setfinalScore(int finalScore){
+		this.finalScore = finalScore;
+	}
+	
+	public int getspendScore(){
+		return finalScore - score;
 	}
 }

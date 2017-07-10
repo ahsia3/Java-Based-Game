@@ -11,13 +11,17 @@ public class Shop extends MouseAdapter{
 	Handler handler;
 	HUD hud;
 	
-	public int B1 = 100;
-	public int B2 = 100;
-	public int B3 = 100;
+	
+	
+	public int B1 = 1000;
+	public int B2 = 1000;
+	public int B3 = 1000;
 	
 	public Shop(Handler handler, HUD hud){
 		this.handler = handler;
 		this.hud = hud;
+		
+	
 	}
 	
 	public void render(Graphics g){
@@ -72,7 +76,7 @@ public class Shop extends MouseAdapter{
 				//you selected box 1
 				if(hud.getScore() >= B1){
 					hud.setScore(hud.getScore() - B1);
-					B1 += 100;
+					B1 += 1000;
 					hud.bounds += 20;
 				
 				}
@@ -86,7 +90,7 @@ public class Shop extends MouseAdapter{
 				//you selected box 2
 				if(hud.getScore() >= B2){
 					hud.setScore(hud.getScore() - B2);
-					B2 += 100;
+					B2 += 1000;
 					handler.speed++;
 				}
 			}
@@ -98,7 +102,7 @@ public class Shop extends MouseAdapter{
 				//you selected box 3
 				if(hud.getScore() >= B3 && !(hud.HEALTH == 100 + (hud.bounds/2))){ //no need to waste score for already max health
 					hud.setScore(hud.getScore() - B3);
-					B3 += 50;
+					B3 += 500;
 					hud.HEALTH = (100 + (hud.bounds/2));
 					
 				}

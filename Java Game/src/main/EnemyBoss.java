@@ -44,11 +44,11 @@ public class EnemyBoss extends GameObject {
 				velX=2;
 			}
 			
-		//	if(velX > 0){
-		//		velX += 0.005f;
-		//	}else if(velX < 0){ 
-		//		velX -= 0.005f;
-		//	}
+			if(velX > 0){
+				velX += 0.005f;
+			}else if(velX < 0){ 
+				velX -= 0.005f;
+			}
 			
 			velX = Game.clamp(velX, -10, 10);
 			
@@ -63,7 +63,7 @@ public class EnemyBoss extends GameObject {
 			velX *=-1;
 		}
 		
-		handler.addObject(new Trail((int)x, (int)y, ID.Trail, Color.red, 96, 96, 0.008f, handler));
+		handler.addObject(new Trail((int)x, (int)y, ID.Trail, Color.red, 96, 96, 0.1f, handler));
 		
 	}
 	

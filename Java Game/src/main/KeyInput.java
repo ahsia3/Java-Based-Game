@@ -52,6 +52,17 @@ public class KeyInput extends KeyAdapter{
 				}
 			}
 		}
+		
+		if(key == KeyEvent.VK_M){
+			if(game.gameState==STATE.Game){
+				if(Game.muted){
+					Game.muted = false;
+				}else{
+					Game.muted = true;
+				}
+			}
+		}
+		
 		if(key == KeyEvent.VK_ESCAPE) System.exit(1);
 		if(key == KeyEvent.VK_SPACE){
 			if(Game.gameState==STATE.Game){

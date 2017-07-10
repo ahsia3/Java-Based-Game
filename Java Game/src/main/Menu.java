@@ -17,6 +17,7 @@ public class Menu extends MouseAdapter{
 	private Shop shop;
 	private Random r = new Random();
 	
+	
 	public Menu(Game game, Handler handler, HUD hud, Shop shop){
 		this.game = game;
 		this.handler = handler;
@@ -31,15 +32,19 @@ public class Menu extends MouseAdapter{
 			//play button
 			if(mouseOver(mx, my, 210, 150, 200, 64)){
 				game.gameState = STATE.Select;
-					
+				
+				if(Game.muted == false){
 				AudioPlayer.getSound("menu_sound").play();
+				}
 				return;
 			}
 			//help button
 			if(mouseOver(mx, my, 210, 250, 200, 64)){
 				game.gameState= STATE.Help;
 				
-				AudioPlayer.getSound("menu_sound").play();
+				if(Game.muted == false){
+					AudioPlayer.getSound("menu_sound").play();
+					}
 			}
 			
 			//quit button
@@ -59,7 +64,9 @@ public class Menu extends MouseAdapter{
 				game.diff = 0;
 				
 					
-				AudioPlayer.getSound("menu_sound").play();
+				if(Game.muted == false){
+					AudioPlayer.getSound("menu_sound").play();
+					}
 			}
 			//Hard button
 			if(mouseOver(mx, my, 210, 250, 200, 64)){
@@ -70,13 +77,17 @@ public class Menu extends MouseAdapter{
 			
 				game.diff = 1;
 				
-				AudioPlayer.getSound("menu_sound").play();
+				if(Game.muted == false){
+					AudioPlayer.getSound("menu_sound").play();
+					}
 			}
 			
 			//Back button
 			if(mouseOver(mx, my, 210, 350, 200, 64)){
 					game.gameState = STATE.Menu;
-					AudioPlayer.getSound("menu_sound").play();
+					if(Game.muted == false){
+						AudioPlayer.getSound("menu_sound").play();
+						}
 					return;
 			}
 		}
@@ -85,7 +96,9 @@ public class Menu extends MouseAdapter{
 				if(game.gameState == STATE.Help){
 					if(mouseOver(mx, my, 210, 350, 200, 64)){
 						game.gameState = STATE.Menu;
-						AudioPlayer.getSound("menu_sound").play();
+						if(Game.muted == false){
+							AudioPlayer.getSound("menu_sound").play();
+							}
 						return;
 					}
 					
@@ -98,13 +111,16 @@ public class Menu extends MouseAdapter{
 				//reset everything back to normal
 				hud.setLevel(1);
 				hud.setScore(0);
+				hud.setfinalScore(0);
 				hud.bounds = 0;
 				handler.speed = 5;
-				shop.B1 = 100;
-				shop.B2 = 100;
-				shop.B3 = 100;
+				shop.B1 = 1000;
+				shop.B2 = 1000;
+				shop.B3 = 1000;
 		
-				AudioPlayer.getSound("menu_sound").play();
+				if(Game.muted == false){
+					AudioPlayer.getSound("menu_sound").play();
+					}
 			}
 		}
 	}
@@ -160,7 +176,7 @@ public class Menu extends MouseAdapter{
 			g.drawString("Use WASD keys to move player and dodge enemies", 120, 150);
 			g.drawString("Press P key to pause the game", 120, 200);
 			g.drawString("Press SPACEBAR key to bring up the Shop", 120, 250);
-			g.drawString("Multiple types of enemies. Beware.", 120, 300);
+			g.drawString("Press M key to mute music", 120, 300);
 			
 			g.setFont(fnt2);
 			g.drawRect(210, 350, 200, 64);
@@ -175,31 +191,34 @@ public class Menu extends MouseAdapter{
 			g.drawString("GAME OVER", 170, 70);
 			
 			g.setFont(fnt3);
-			g.drawString("You lost with a score of: " + hud.getScore(), 210, 200);
+			g.drawString("You lost with a score of: " + hud.getfinalScore(), 210, 200);
+			
+			g.setFont(fnt3);
+			g.drawString("How much you spent: " + hud.getspendScore(), 210, 250);
 			
 			g.setFont(fnt2);
 			g.drawRect(210, 350, 200, 64);
 			g.drawString("Main Menu", 235, 392);
 		}else if(game.gameState == STATE.Select){
-			Font fnt = new Font("arial", 1, 50);
+			Font fnt = new Font("arial", 1, 45);
 			Font fnt2 = new Font("arial", 1, 30);
 			Font fnt0 = new Font("Zapfino", 1, 15);
 			
 			g.setFont(fnt);
 			g.setColor(Color.white);
-			g.drawString("SELECT DIFFICULTY", 80, 70);
+			g.drawString("SELECT DIFFICULTY", 90, 70);
 			
 			g.setFont(fnt2);
 			g.drawRect(210, 150, 200, 64);
-			g.drawString("Normal", 270, 190);
+			g.drawString("Normal", 260, 192);
 			
 			g.setColor(Color.white);
 			g.drawRect(210, 250, 200, 64);
-			g.drawString("Hard", 270, 290);
+			g.drawString("Hard", 270, 292);
 			
 			g.setColor(Color.white);
 			g.drawRect(210, 350, 200, 64);
-			g.drawString("Back", 270, 390);
+			g.drawString("Back", 270, 392);
 			}
 	}
 }

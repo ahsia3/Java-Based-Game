@@ -18,6 +18,7 @@ public class Game extends Canvas implements Runnable{
 	private boolean running = false;
 	
 	public static boolean paused = false;
+	public static boolean muted = false;
 	public int diff = 0;
 	//0 = normal difficulty; 1 = hard difficulty;
 	
@@ -56,12 +57,14 @@ public class Game extends Canvas implements Runnable{
 		this.addMouseListener(menu);
 		this.addMouseListener(shop);
 		
-		AudioPlayer.load();
-		AudioPlayer.getMusic("music").loop(1, 0.1f);
+	     do{
+			AudioPlayer.load();
+			AudioPlayer.getMusic("music").loop(1, 0.1f);
+		}while(muted);
 		
 		new Window(WIDTH, HEIGHT, "WASDodge", this);
 		
-		spawner = new spawn(handler, hud, this);
+		spawner = new spawn(hud, handler, this);
 		r = new Random();
 		
 		if(gameState == STATE.Game){
@@ -126,6 +129,10 @@ public class Game extends Canvas implements Runnable{
 				hud.tick();
 				spawner.tick();
 				handler.tick();
+				if(muted){
+					AudioPlayer.load();
+					AudioPlayer.getMusic("music").loop(1, 0.1f);
+					}
 				if(HUD.HEALTH <= 0){
 					HUD.HEALTH = 100;
 					gameState = STATE.End;
@@ -135,12 +142,28 @@ public class Game extends Canvas implements Runnable{
 					}
 					
 				}
+			}else{
+				//When it is in pause mode
+				if(muted){
+					AudioPlayer.load();
+					AudioPlayer.getMusic("music").loop(1, 0.1f);
+					}
 			}
+			
 			
 		
 		}else if(gameState == STATE.Menu || gameState == STATE.End || gameState == STATE.Select || gameState == STATE.Help){
 			menu.tick();
 			handler.tick();
+			if(muted){
+				AudioPlayer.load();
+				AudioPlayer.getMusic("music").loop(1, 0.1f);
+				}
+		}else if(gameState == STATE.Shop){
+			if(muted){
+				AudioPlayer.load();
+				AudioPlayer.getMusic("music").loop(1, 0.1f);
+				}
 		}
 		
 	}
@@ -160,7 +183,12 @@ public class Game extends Canvas implements Runnable{
 		
 		if(paused){
 			g.setColor(Color.darkGray);
-			g.drawString("PAUSED", 10, 120);
+			g.drawString("PAUSED", 15, 120);
+		}
+		
+		if(muted){
+			g.setColor(Color.darkGray);
+			g.drawString("Muted", 15, 220);
 		}
 		
 		if(gameState == STATE.Game){
