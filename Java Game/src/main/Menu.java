@@ -192,12 +192,12 @@ public class Menu extends MouseAdapter{
 			g.drawString("GAME OVER", 170, 70);
 			
 			g.setFont(fnt3);
-			g.drawString("You lost with a score of: " + hud.getfinalScore(), 210, 200);
+			g.drawString("Final Score: " + hud.getfinalScore(), 250, 180);
 			
 			
-			g.drawString("How much you spent: " + hud.getspendScore(), 210, 250);
+			g.drawString("Spent: " + hud.getspendScore(), 250, 230);
 			
-			g.drawString("rekt on level " + hud.getLevel(), 210, 300);
+			g.drawString("rekt on level " + hud.getLevel(), 250, 280);
 			
 			g.setFont(fnt2);
 			g.drawRect(210, 350, 200, 64);
