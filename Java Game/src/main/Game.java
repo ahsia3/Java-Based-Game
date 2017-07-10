@@ -62,7 +62,7 @@ public class Game extends Canvas implements Runnable{
 			AudioPlayer.getMusic("music").loop(1, 0.1f);
 		}while(muted);
 		
-		new Window(WIDTH, HEIGHT, "WASDodge  0.1.3", this);
+		new Window(WIDTH, HEIGHT, "WASDodge", this);
 		
 		spawner = new spawn(hud, handler, this);
 		r = new Random();
