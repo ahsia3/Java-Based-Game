@@ -278,6 +278,7 @@ public class Menu extends MouseAdapter{
 			g.setColor(Color.white);
 			g.drawRect(210, 350, 200, 64);
 			g.drawString("Back", 270, 392);
+			
 			}
 	}
 }
