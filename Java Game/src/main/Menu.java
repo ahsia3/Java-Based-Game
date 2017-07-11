@@ -62,7 +62,7 @@ public class Menu extends MouseAdapter{
 				handler.addObject(new BasicEnemy(r.nextInt(Game.WIDTH), r.nextInt(Game.HEIGHT), ID.BasicEnemy, handler));
 			
 				game.diff = 0;
-				
+
 					
 				if(Game.muted == false){
 					AudioPlayer.getSound("menu_sound").play();
@@ -76,6 +76,7 @@ public class Menu extends MouseAdapter{
 				handler.addObject(new HardEnemy(r.nextInt(Game.WIDTH), r.nextInt(Game.HEIGHT), ID.BasicEnemy, handler));
 			
 				game.diff = 1;
+
 				
 				if(Game.muted == false){
 					AudioPlayer.getSound("menu_sound").play();
@@ -257,6 +258,15 @@ public class Menu extends MouseAdapter{
 				g.setColor(Color.red);
 				g.drawString(" " + shop.b3click, 588, 230);
 			}
+			
+			g.setColor(Color.black);
+			if(game.diff==1){
+				g.drawString("Hard difficulty ", 260, 330);
+			}else if(game.diff ==0){
+				g.drawString("Normal difficulty ", 250, 330);
+			}
+			
+			
 					
 		}else if(game.gameState == STATE.Select){
 			Font fnt = new Font("arial", 1, 45);
