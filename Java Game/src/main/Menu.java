@@ -117,6 +117,10 @@ public class Menu extends MouseAdapter{
 				shop.B1 = 1000;
 				shop.B2 = 1000;
 				shop.B3 = 1000;
+				shop.b1click=0;
+				shop.b2click=0;
+				shop.b3click=0;
+				
 		
 				if(Game.muted == false){
 					AudioPlayer.getSound("menu_sound").play();
@@ -147,7 +151,7 @@ public class Menu extends MouseAdapter{
 		g.setFont(fnt0);
 		g.setColor(Color.BLACK);
 		g.drawString("@ahsia   |   Summer 2017", 10, 446);
-		g.drawString("Version 0.1.3", 520, 446);
+		g.drawString("Version 0.1.4", 520, 446);
 		
 		g.setFont(fnt);
 		g.setColor(Color.white);
@@ -191,16 +195,69 @@ public class Menu extends MouseAdapter{
 			g.setColor(Color.white);
 			g.drawString("GAME OVER", 170, 70);
 			
-			g.setFont(fnt3);
-			g.drawString("Final Score: " + hud.getfinalScore(), 250, 180);
-			
-			g.drawString("Spent: " + hud.getspendScore(), 250, 230);
-			
-			g.drawString("rekt on level " + hud.getLevel(), 250, 280);
-			
 			g.setFont(fnt2);
 			g.drawRect(210, 350, 200, 64);
 			g.drawString("Main Menu", 235, 392);
+			
+			g.setFont(fnt3);
+			g.drawString("Final Score: ", 213, 130);
+			g.drawString("Spent: ", 250, 230);
+			g.drawString("Bank: ", 256, 180);
+			g.drawString("rekt on level ", 210, 280);
+			
+			g.drawString("HP x", 370, 230);
+			g.drawString("Speed x", 432, 230);
+			g.drawString("Restore x", 520, 230);
+			
+			//IF SPENT nothing (0) = white color, ELSE spent = blue
+			if(hud.getspendScore() == 0){
+				g.setColor(Color.red);
+				g.drawString(" " + hud.getspendScore(), 306, 230);
+			}else{
+				g.setColor(Color.blue);
+				g.drawString(" " + hud.getspendScore(), 306, 230);
+			}
+			
+			//MONEY IN THE BANK THAT YOU LEFT BEHIND
+			if(hud.getScore() == 0){
+				g.setColor(Color.red);
+				g.drawString(" " + hud.getScore(), 305, 180);
+			}else{
+				g.setColor(Color.blue);
+				g.drawString(" " + hud.getScore(), 305, 180);
+			}
+			
+			g.setColor(Color.blue);
+			g.drawString(" " + hud.getfinalScore(), 305, 130);
+			g.drawString(" " + hud.getLevel(), 305, 280);
+			
+			//IF Upgraded = blue, ELSE 0 = white
+			if(shop.b1click > 0){
+				g.setColor(Color.blue);
+				g.drawString(" " + shop.b1click, 402, 230);
+			}else{
+				g.setColor(Color.red);
+				g.drawString(" " + shop.b1click, 402, 230);
+			}
+			
+			//IF Upgraded = blue, ELSE 0 = white
+			if(shop.b2click > 0){
+				g.setColor(Color.blue);
+				g.drawString(" " + shop.b2click, 489, 230);
+			}else{
+				g.setColor(Color.red);
+				g.drawString(" " + shop.b2click, 489, 230);
+			}
+			
+			//IF Upgraded = blue, ELSE 0 = white
+			if(shop.b3click > 0){
+				g.setColor(Color.blue);
+				g.drawString(" " + shop.b3click, 588, 230);
+			}else{
+				g.setColor(Color.red);
+				g.drawString(" " + shop.b3click, 588, 230);
+			}
+					
 		}else if(game.gameState == STATE.Select){
 			Font fnt = new Font("arial", 1, 45);
 			Font fnt2 = new Font("arial", 1, 30);

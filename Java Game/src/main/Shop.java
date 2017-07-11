@@ -17,6 +17,10 @@ public class Shop extends MouseAdapter{
 	public int B2 = 1000;
 	public int B3 = 1000;
 	
+	public int b1click = 0;
+	public int b2click = 0;
+	public int b3click = 0;
+	
 	public Shop(Handler handler, HUD hud){
 		this.handler = handler;
 		this.hud = hud;
@@ -78,6 +82,7 @@ public class Shop extends MouseAdapter{
 					hud.setScore(hud.getScore() - B1);
 					B1 += 1000;
 					hud.bounds += 20;
+					b1click++;
 				}
 				
 			}
@@ -91,6 +96,7 @@ public class Shop extends MouseAdapter{
 					hud.setScore(hud.getScore() - B2);
 					B2 += 1000;
 					handler.speed++;
+					b2click++;
 				}
 			}
 		}
@@ -103,7 +109,7 @@ public class Shop extends MouseAdapter{
 					hud.setScore(hud.getScore() - B3);
 					B3 += 500;
 					hud.HEALTH = (100 + (hud.bounds/2));
-					
+					b3click++;
 				}
 			}
 		}
