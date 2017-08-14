@@ -121,6 +121,7 @@ public class Menu extends MouseAdapter{
 				shop.b1click=0;
 				shop.b2click=0;
 				shop.b3click=0;
+				game.checkScore();
 				
 		
 				if(Game.muted == false){
@@ -188,6 +189,7 @@ public class Menu extends MouseAdapter{
 			g.drawRect(210, 350, 200, 64);
 			g.drawString("Back", 270, 390);
 		}else if(game.gameState == STATE.End){
+			
 			Font fnt = new Font("arial", 1, 50);
 			Font fnt2 = new Font("arial", 1, 30);
 			Font fnt3 = new Font("arial", 1, 15);
@@ -271,7 +273,6 @@ public class Menu extends MouseAdapter{
 		}else if(game.gameState == STATE.Select){
 			Font fnt = new Font("arial", 1, 45);
 			Font fnt2 = new Font("arial", 1, 30);
-			Font fnt0 = new Font("Zapfino", 1, 15);
 			
 			g.setFont(fnt);
 			g.setColor(Color.white);

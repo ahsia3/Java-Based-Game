@@ -3,9 +3,6 @@ package main;
 import java.awt.Color;
 import java.awt.Graphics;
 
-//import main.Game.STATE;
-
-
 public class HUD {
 
 	public int bounds = 0;
@@ -16,9 +13,6 @@ public class HUD {
 	private int score = 0;
 	private int finalScore = 0;
 	private int level =1;
-	
-//	private int [] bestLevel = new int[100];
-	
 	
 	public void tick(){
 		HEALTH = Game.clamp(HEALTH, 0, 100 + (bounds/2));
@@ -43,27 +37,6 @@ public class HUD {
 		g.setColor(Color.blue);
 		g.drawString("Space for Shop", 15, 96);
 	}
-	
-	
-	//Trying to display your highest level gotten but having trouble figuring it out
-/*	public void setbestLevel(int[] bestLevel){
-		this.bestLevel[0] = bestLevel[0];
-	}
-	
-	
-	public int getbestLevel(){
-		if(Game.gameState == STATE.End){
-			int getLevel = getLevel();
-			int i=0;
-			while(i<bestLevel.length){
-				if(bestLevel[i] < getLevel ){
-					bestLevel[i]=getLevel;
-				}else if(bestLevel[i] > getLevel){
-					
-				}
-			}
-		}
-	}*/
 	
 	public void setScore(int score){
 		this.score = score;

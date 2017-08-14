@@ -6,7 +6,16 @@ import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.Random;
+
+import javax.swing.JOptionPane;
 
 public class Game extends Canvas implements Runnable{
 
@@ -29,6 +38,8 @@ public class Game extends Canvas implements Runnable{
 	private HUD hud;
 	private spawn spawner;
 	private Menu menu;
+	private String highscore = "";
+	private String scoreHARD = "";
 	
 	public enum STATE {
 		Menu,
@@ -43,8 +54,9 @@ public class Game extends Canvas implements Runnable{
 	
 	public static BufferedImage sprite_sheet;
 	
+
+	
 	public Game(){
-		
 		BufferedImageLoader loader = new BufferedImageLoader();
 		
 		sprite_sheet = loader.loadImage("/sprite_sheet.png");
@@ -73,6 +85,148 @@ public class Game extends Canvas implements Runnable{
 		}else{
 			for(int i=0; i< 10; i++){
 				handler.addObject(new MenuParticle(r.nextInt(WIDTH), r.nextInt(HEIGHT), ID.MenuParticle, handler));
+			}
+		}
+	}
+	
+	/* ON NORMAL DIFFICULTY
+	 * Gets file (highscore.dat) and reads the only line in the file
+	 *  @param reader.readLine();
+	 */
+	public String GetHighScore(){
+		//format: 	Brandon:100
+		FileReader readFile = null;
+		BufferedReader reader = null;
+		try{
+			
+		readFile = new FileReader("highscore.dat");
+		reader = new BufferedReader(readFile);
+		return reader.readLine();
+		
+		}catch(Exception e){
+			return "Nobody - 0";
+		}finally{
+			//close the reader
+			try{
+				if(reader !=null){
+					reader.close();
+				}
+			}catch (IOException e){
+				e.printStackTrace();
+			}
+		}
+	}
+	
+	/* ON NORMAL DIFFICULTY
+	 * Check to see if highscore.dat file exists, if not: make one
+	 *  and ask the user to input a name into file if highScore is beaten
+	 * 
+	 */
+	
+	public void checkScore(){
+		if(highscore.equals("")){
+			return;
+		}
+		if(hud.getfinalScore() > Integer.parseInt(highscore.split(" - ")[1])){
+			//user has set a new record
+			String name = JOptionPane.showInputDialog("You set a new highscore. What is your name?");
+			highscore = name + " - " + hud.getfinalScore();
+			
+			File scoreFile = new File("highscore.dat");
+			if(!scoreFile.exists()){
+				try {
+					scoreFile.createNewFile();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+			FileWriter writeFile = null;
+			BufferedWriter writer = null;
+			try{
+				writeFile = new FileWriter(scoreFile);
+				writer = new BufferedWriter(writeFile);
+				writer.write(this.highscore);
+			}catch(Exception e){
+				//errors
+			}finally{
+				try{
+					if(writer != null){
+						writer.close();
+					}
+				}catch (Exception e){
+					
+				}
+			}
+		}
+	}
+	
+	/* ON HARD DIFFICULTY
+	 * Gets file (highscoreHARD.dat) and reads the only line in the file
+	 *  @param reader.readLine();
+	 */
+	public String GetHighScoreHARD(){
+		//format: 	Brandon:100
+		FileReader readFile = null;
+		BufferedReader reader = null;
+		try{
+			
+		readFile = new FileReader("highscoreHARD.dat");
+		reader = new BufferedReader(readFile);
+		return reader.readLine();
+		
+		}catch(Exception e){
+			return "Nobody - 0";
+		}finally{
+			//close the reader
+			try{
+				if(reader !=null){
+					reader.close();
+				}
+			}catch (IOException e){
+				e.printStackTrace();
+			}
+		}
+	}
+	
+	/* ON HARD DIFFICULTY
+	 * Check to see if highscoreHARD.dat file exists, if not: make one
+	 *  and ask the user to input a name into file if highScore is beaten
+	 * 
+	 */
+	
+	public void checkScoreHARD(){
+		if(scoreHARD.equals("")){
+			return;
+		}
+		if(hud.getfinalScore() > Integer.parseInt(scoreHARD.split(" - ")[1])){
+			//user has set a new record
+			String name = JOptionPane.showInputDialog("You set a new highscore. What is your name?");
+			scoreHARD = name + " - " + hud.getfinalScore();
+			
+			File scoreFile = new File("highscoreHARD.dat");
+			if(!scoreFile.exists()){
+				try {
+					scoreFile.createNewFile();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+			FileWriter writeFile = null;
+			BufferedWriter writer = null;
+			try{
+				writeFile = new FileWriter(scoreFile);
+				writer = new BufferedWriter(writeFile);
+				writer.write(this.scoreHARD);
+			}catch(Exception e){
+				//errors
+			}finally{
+				try{
+					if(writer != null){
+						writer.close();
+					}
+				}catch (Exception e){
+					
+				}
 			}
 		}
 	}
@@ -140,7 +294,6 @@ public class Game extends Canvas implements Runnable{
 					for(int i=0; i< 10; i++){
 						handler.addObject(new MenuParticle(r.nextInt(WIDTH), r.nextInt(HEIGHT), ID.MenuParticle, handler));
 					}
-					
 				}
 			}else{
 				//When it is in pause mode
@@ -165,7 +318,6 @@ public class Game extends Canvas implements Runnable{
 				AudioPlayer.getMusic("music").loop(1, 0.1f);
 				}
 		}
-		
 	}
 	
 	private void render(){
@@ -201,7 +353,40 @@ public class Game extends Canvas implements Runnable{
 			handler.render(g);
 		}else if(gameState == STATE.End){
 			menu.render(g);
-			handler.removeObject(null);
+			
+			//Normal difficulty
+			if(diff == 0){
+			//When Game ends check score and display for HighScores
+				checkScore();
+				if (highscore.equals("")){
+					//init highscore
+					highscore = GetHighScore();
+				}
+			}
+			
+			//Hard difficulty
+			if(diff == 1){
+			//When Game ends check score and display for HighScores
+				checkScoreHARD();
+				if (scoreHARD.equals("")){
+					//init highscore
+					scoreHARD = GetHighScoreHARD();
+				}
+			}
+
+			Font fnt0 = new Font("Book Antiqua", 1, 15);
+			g.setFont(fnt0);
+			g.setColor(Color.darkGray);
+			g.drawString("HIGH SCORE Normal: ", 5 , 125);
+			g.drawString("----------------------------------", 0 , 100);
+			g.drawString("----------------------------------", 0 , 165);
+			g.drawString("----------------------------------", 0 , 230);
+			g.drawString("" + highscore, 10 , 145);
+			
+			g.drawString("HIGH SCORE Hard: ", 5 , 190);
+			g.drawString("" + scoreHARD, 10 , 210);
+			
+			//handler.removeObject(null);
 		}
 			
 		g.dispose();
