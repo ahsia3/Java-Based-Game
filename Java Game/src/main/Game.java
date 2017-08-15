@@ -40,6 +40,8 @@ public class Game extends Canvas implements Runnable{
 	private Menu menu;
 	private String highscore = "";
 	private String scoreHARD = "";
+	private String levelNorm = "";
+	private String levelHard = "";
 	
 	public enum STATE {
 		Menu,
@@ -104,7 +106,33 @@ public class Game extends Canvas implements Runnable{
 		return reader.readLine();
 		
 		}catch(Exception e){
-			return "Nobody - 0";
+			return "Nobody - Score: 0";
+		}finally{
+			//close the reader
+			try{
+				if(reader !=null){
+					reader.close();
+				}
+			}catch (IOException e){
+				e.printStackTrace();
+			}
+		}
+	}
+	
+	
+	//READS Highest LEVEL from Level FILE
+	public String GetHighLevel(){
+		//format: 	Brandon:100
+		FileReader readFile = null;
+		BufferedReader reader = null;
+		try{
+			
+		readFile = new FileReader("highLevel.dat");
+		reader = new BufferedReader(readFile);
+		return reader.readLine();
+		
+		}catch(Exception e){
+			return "Nobody - Level: 0";
 		}finally{
 			//close the reader
 			try{
@@ -127,10 +155,11 @@ public class Game extends Canvas implements Runnable{
 		if(highscore.equals("")){
 			return;
 		}
-		if(hud.getfinalScore() > Integer.parseInt(highscore.split(" - ")[1])){
+		if(hud.getfinalScore() > Integer.parseInt(highscore.split(" - Score: ")[1])){
 			//user has set a new record
 			String name = JOptionPane.showInputDialog("You set a new highscore. What is your name?");
-			highscore = name + " - " + hud.getfinalScore();
+			highscore = name + " - Score: " + hud.getfinalScore();
+			levelNorm = name + " - Level: " + hud.getLevel();
 			
 			File scoreFile = new File("highscore.dat");
 			if(!scoreFile.exists()){
@@ -157,7 +186,35 @@ public class Game extends Canvas implements Runnable{
 					
 				}
 			}
+			
+			//WRITING HIGH LEVEL OF NORMAL DIFF. FILE
+			File levelFile = new File("highLevel.dat");
+			if(!levelFile.exists()){
+				try {
+					levelFile.createNewFile();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+			FileWriter writeFil = null;
+			BufferedWriter write = null;
+			try{
+				writeFil = new FileWriter(levelFile);
+				write = new BufferedWriter(writeFil);
+				write.write(this.levelNorm);
+			}catch(Exception e){
+				//errors
+			}finally{
+				try{
+					if(write != null){
+						write.close();
+					}
+				}catch (Exception e){
+					
+				}
+			}
 		}
+	
 	}
 	
 	/* ON HARD DIFFICULTY
@@ -175,7 +232,7 @@ public class Game extends Canvas implements Runnable{
 		return reader.readLine();
 		
 		}catch(Exception e){
-			return "Nobody - 0";
+			return "Nobody - Score: 0";
 		}finally{
 			//close the reader
 			try{
@@ -188,6 +245,31 @@ public class Game extends Canvas implements Runnable{
 		}
 	}
 	
+	//READS Highest LEVEL from Level FILE
+		public String GetHighLevelHARD(){
+			//format: 	Brandon:100
+			FileReader readFile = null;
+			BufferedReader reader = null;
+			try{
+				
+			readFile = new FileReader("highLevelHARD.dat");
+			reader = new BufferedReader(readFile);
+			return reader.readLine();
+			
+			}catch(Exception e){
+				return "Nobody - Level: 0";
+			}finally{
+				//close the reader
+				try{
+					if(reader !=null){
+						reader.close();
+					}
+				}catch (IOException e){
+					e.printStackTrace();
+				}
+			}
+		}
+	
 	/* ON HARD DIFFICULTY
 	 * Check to see if highscoreHARD.dat file exists, if not: make one
 	 *  and ask the user to input a name into file if highScore is beaten
@@ -198,10 +280,11 @@ public class Game extends Canvas implements Runnable{
 		if(scoreHARD.equals("")){
 			return;
 		}
-		if(hud.getfinalScore() > Integer.parseInt(scoreHARD.split(" - ")[1])){
+		if(hud.getfinalScore() > Integer.parseInt(scoreHARD.split(" - Score: ")[1])){
 			//user has set a new record
 			String name = JOptionPane.showInputDialog("You set a new highscore. What is your name?");
-			scoreHARD = name + " - " + hud.getfinalScore();
+			scoreHARD = name + " - Score: " + hud.getfinalScore();
+			levelHard = name + " - Level: " + hud.getLevel();
 			
 			File scoreFile = new File("highscoreHARD.dat");
 			if(!scoreFile.exists()){
@@ -228,8 +311,39 @@ public class Game extends Canvas implements Runnable{
 					
 				}
 			}
+		
+			//WRITING HIGH SCORE OF LEVEL FILE for HARD difficulty
+			File LevelFile = new File("highLevelHARD.dat");
+			if(!LevelFile.exists()){
+				try {
+					LevelFile.createNewFile();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+			FileWriter writeFil = null;
+			BufferedWriter write = null;
+			try{
+				writeFil = new FileWriter(LevelFile);
+				write = new BufferedWriter(writeFil);
+				write.write(this.levelHard);
+			}catch(Exception e){
+				//errors
+			}finally{
+				try{
+					if(write != null){
+						write.close();
+					}
+				}catch (Exception e){
+					
+				}
+			}
 		}
+		
+		
 	}
+	
+	
 		
 	
 	public synchronized void start(){
@@ -340,7 +454,7 @@ public class Game extends Canvas implements Runnable{
 		
 		if(muted){
 			g.setColor(Color.darkGray);
-			g.drawString("Muted", 15, 220);
+			g.drawString("Muted", 7, 280);
 		}
 		
 		if(gameState == STATE.Game){
@@ -361,6 +475,11 @@ public class Game extends Canvas implements Runnable{
 				if (highscore.equals("")){
 					//init highscore
 					highscore = GetHighScore();
+					levelNorm = GetHighLevel();
+				}
+				if(scoreHARD.equals("")){
+					scoreHARD = GetHighScoreHARD();
+					levelHard = GetHighLevelHARD();
 				}
 			}
 			
@@ -368,23 +487,43 @@ public class Game extends Canvas implements Runnable{
 			if(diff == 1){
 			//When Game ends check score and display for HighScores
 				checkScoreHARD();
+				
 				if (scoreHARD.equals("")){
 					//init highscore
 					scoreHARD = GetHighScoreHARD();
+					levelHard = GetHighLevelHARD();
+				}
+				if(highscore.equals("")){
+					highscore = GetHighScore();
+					levelNorm = GetHighLevel();
 				}
 			}
 
 			Font fnt0 = new Font("Book Antiqua", 1, 15);
 			g.setFont(fnt0);
-			g.setColor(Color.darkGray);
-			g.drawString("HIGH SCORE Normal: ", 5 , 125);
-			g.drawString("----------------------------------", 0 , 100);
-			g.drawString("----------------------------------", 0 , 165);
-			g.drawString("----------------------------------", 0 , 230);
-			g.drawString("" + highscore, 10 , 145);
+			g.setColor(Color.black);
+			g.drawString("HIGH SCORES ", 29 , 95);
 			
-			g.drawString("HIGH SCORE Hard: ", 5 , 190);
-			g.drawString("" + scoreHARD, 10 , 210);
+			g.setColor(Color.darkGray);
+			g.drawString("" + highscore, 10 , 145);
+			g.drawString("" + levelNorm, 10 , 165);
+			
+			g.drawString("" + scoreHARD, 10 , 225);
+			g.drawString("" + levelHard, 10 , 245);
+			g.setColor(Color.red);
+			
+			g.drawArc(30, 95, 110, 5, 180, 180);
+			g.drawArc(30, 75, 110, 5, 180, 180);
+			g.setColor(Color.lightGray);
+			g.drawArc(1, 110, 1, 310, 90, 90);
+			//g.drawString("----------------------------------", 0 , 100);
+			g.drawString("------------------------------------", 0 , 185);
+			g.drawString("------------------------------------", 0 , 270);
+			
+			g.setColor(Color.black);
+			g.drawString("Normal: ", 5 , 125);
+
+			g.drawString("Hard: ", 5 , 205);
 			
 			//handler.removeObject(null);
 		}

@@ -152,8 +152,8 @@ public class Menu extends MouseAdapter{
 		
 		g.setFont(fnt0);
 		g.setColor(Color.BLACK);
-		g.drawString("@ahsia   |   Summer 2017", 10, 446);
-		g.drawString("Version 0.1.4", 520, 446);
+		g.drawString("@ahsia   |   Summer 2017", 10, 440);
+		g.drawString("Version 0.1.5", 520, 440);
 		
 		g.setFont(fnt);
 		g.setColor(Color.white);
