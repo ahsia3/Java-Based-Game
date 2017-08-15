@@ -56,7 +56,6 @@ public class Game extends Canvas implements Runnable{
 	
 	public static BufferedImage sprite_sheet;
 	
-
 	
 	public Game(){
 		BufferedImageLoader loader = new BufferedImageLoader();
